@@ -8,6 +8,7 @@ class Usuario(AbstractUser):
         ('admin', 'Administrador'),
         ('compras', 'Compras'),
         ('analista', 'Analista'),
+        ('proveedor', 'Proveedor'),
     )
 
     rol = models.CharField(max_length=20, choices=ROLES)

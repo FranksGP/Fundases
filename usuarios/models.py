@@ -12,6 +12,7 @@ class Usuario(AbstractUser):
 
     rol = models.CharField(max_length=20, choices=ROLES)
     activo = models.BooleanField(default=True)
+    fecha_creacion = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.username

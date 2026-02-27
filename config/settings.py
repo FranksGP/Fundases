@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'usuarios',
     'rest_framework',
+    'proveedores',
     
 ]
 

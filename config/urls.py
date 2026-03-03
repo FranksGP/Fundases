@@ -26,6 +26,8 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls')),
     path('api/', include('usuarios.urls')),
     path('api/', include('proveedores.urls')),
+    path('api/', include('compras.urls')),
     path('api/login/', TokenObtainPairView.as_view()), # La ruta 'api/login/' se asigna a la vista TokenObtainPairView, que es proporcionada por la biblioteca Simple JWT. Esta vista se encarga de manejar las solicitudes de inicio de sesión y generar un par de tokens (access y refresh) para el usuario autenticado. El nombre 'token_obtain_pair' se utiliza para referenciar esta ruta en otras partes del código, como en las pruebas o en la documentación de la API.
     path('api/refresh/', TokenRefreshView.as_view()), # La ruta 'api/refresh/' se asigna a la vista TokenRefreshView, que también es proporcionada por la biblioteca Simple JWT. Esta vista se encarga de manejar las solicitudes de actualización de tokens, lo que permite a los usuarios obtener un nuevo token de acceso utilizando un token de actualización válido. El nombre 'token_refresh' se utiliza para referenciar esta ruta en otras partes del código, como en las pruebas o en la documentación de la API.
+    
 ]

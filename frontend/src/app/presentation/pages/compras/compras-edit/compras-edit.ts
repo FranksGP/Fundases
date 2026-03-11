@@ -4,6 +4,5 @@ import { Component } from '@angular/core';
   selector: 'app-compras-edit',
   imports: [],
   templateUrl: './compras-edit.html',
-  styleUrl: './compras-edit.css',
 })
-export class ComprasEdit {}
+export class ComprasEditComponent {}

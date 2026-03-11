@@ -1,1 +1,53 @@
-<p>compras-list works!</p>
+<h2>Compras</h2>
+
+<a routerLink="/compras/crear">
+Nueva Compra
+</a>
+
+<table border="1">
+
+<thead>
+
+<tr>
+<th>ID</th>
+<th>Proveedor</th>
+<th>Usuario</th>
+<th>Fecha</th>
+<th>Acciones</th>
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr *ngFor="let compra of compras">
+
+<td>{{compra.id}}</td>
+
+<td>{{compra.proveedor.nombre}}</td>
+
+<td>{{compra.usuario.username}}</td>
+
+<td>{{compra.fecha}}</td>
+
+<td>
+
+<a [routerLink]="['/compras',compra.id]">
+Ver
+</a>
+
+<a [routerLink]="['/compras/editar',compra.id]">
+Editar
+</a>
+
+<button (click)="deleteCompra(compra.id)">
+Eliminar
+</button>
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>

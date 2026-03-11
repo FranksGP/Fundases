@@ -9,7 +9,7 @@ from rest_framework.filters import OrderingFilter
 class CompraViewSet(viewsets.ModelViewSet):
     queryset = Compra.objects.all()
     serializer_class = CompraSerializer
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]  # Temporalmente comentado para pruebas
 
     filter_backends = [DjangoFilterBackend, OrderingFilter]
     filterset_fields = ['proveedor', 'fecha', 'usuario']

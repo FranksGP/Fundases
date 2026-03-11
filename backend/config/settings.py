@@ -80,11 +80,13 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 # JWT settings
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=30),   # antes 5 o 15
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=1440),   # antes 5 o 15
     'REFRESH_TOKEN_LIFETIME': timedelta(days=7),
 }
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
+
+CORS_ALLOW_ALL_ORIGINS = True
 
 DATABASES = {
     'default': {

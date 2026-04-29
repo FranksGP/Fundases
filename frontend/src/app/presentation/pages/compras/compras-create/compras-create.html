@@ -1,18 +1,36 @@
-<h2>Nueva Compra</h2>
+<section class="panel">
+  <h2>Nueva compra</h2>
+  <form [formGroup]="form" (ngSubmit)="save()" class="form-grid">
+    <label class="field">
+      Proveedor
+      <select formControlName="proveedor">
+        <option [ngValue]="null">Seleccione...</option>
+        <option *ngFor="let proveedor of proveedores" [ngValue]="proveedor.id">{{ proveedor.nombre }}</option>
+      </select>
+    </label>
 
-<form [formGroup]="form" (ngSubmit)="save()">
+    <label class="field">
+      Usuario
+      <select formControlName="usuario">
+        <option [ngValue]="null">Seleccione...</option>
+        <option *ngFor="let usuario of usuarios" [ngValue]="usuario.id">{{ usuario.username }}</option>
+      </select>
+    </label>
 
-<label>Proveedor</label>
-<input formControlName="proveedor">
+    <label class="field">
+      N° factura
+      <input formControlName="numero_factura" />
+    </label>
 
-<label>Número de Factura</label>
-<input formControlName="numero_factura">
+    <label class="field">
+      Fecha
+      <input type="date" formControlName="fecha" />
+    </label>
 
-<label>Fecha</label>
-<input type="date" formControlName="fecha">
+    <div>
+      <button class="btn btn--primary" type="submit" [disabled]="form.invalid || isLoading">Guardar</button>
+    </div>
+  </form>
 
-<button type="submit">
-Guardar
-</button>
-
-</form>
+  <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
+</section>

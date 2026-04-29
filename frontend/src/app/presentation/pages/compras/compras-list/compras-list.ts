@@ -1,60 +1,46 @@
+import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
+import { RouterModule } from '@angular/router';
+import { finalize } from 'rxjs';
 import { ComprasService } from '../../../../application/services/compras.service';
 import { Compra } from '../../../../domain/models/compra.model';
-import { RouterModule } from '@angular/router';
-import { CommonModule } from '@angular/common';
 
 @Component({
-selector:'app-compras-list',
-standalone:true,
-imports:[
-CommonModule,
-RouterModule
-],
-templateUrl:'./compras-list.html'
+  selector: 'app-compras-list',
+  standalone: true,
+  imports: [CommonModule, RouterModule],
+  templateUrl: './compras-list.html'
 })
-export class ComprasListComponent implements OnInit{
+export class ComprasListComponent implements OnInit {
+  private readonly comprasService = inject(ComprasService);
 
-private comprasService = inject(ComprasService);
+  compras: Compra[] = [];
+  isLoading = false;
+  errorMessage = '';
 
-compras:Compra[] = [];
+  ngOnInit(): void {
+    this.loadCompras();
+  }
 
-count=0;
+  loadCompras(): void {
+    this.isLoading = true;
+    this.errorMessage = '';
 
-next:string|null=null;
-previous:string|null=null;
+    this.comprasService
+      .getCompras()
+      .pipe(finalize(() => (this.isLoading = false)))
+      .subscribe({
+        next: (response) => (this.compras = response.results),
+        error: () => (this.errorMessage = 'No fue posible cargar las compras.')
+      });
+  }
 
-ngOnInit(){
+  deleteCompra(id: number): void {
+    if (!confirm('¿Eliminar compra?')) return;
 
-this.loadCompras();
-
-}
-
-loadCompras(url?:string){
-
-this.comprasService.getCompras().subscribe(res=>{
-
-this.compras = res.results;
-this.count = res.count;
-this.next = res.next;
-this.previous = res.previous;
-
-});
-
-}
-
-deleteCompra(id:number){
-
-if(confirm("¿Eliminar compra?")){
-
-this.comprasService.deleteCompra(id).subscribe(()=>{
-
-this.loadCompras();
-
-});
-
-}
-
-}
-
+    this.comprasService.deleteCompra(id).subscribe({
+      next: () => this.loadCompras(),
+      error: () => (this.errorMessage = 'No fue posible eliminar la compra.')
+    });
+  }
 }

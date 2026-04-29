@@ -1,47 +1,38 @@
-import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Pagination } from '../../domain/models/pagination.model';
+import { inject, Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Compra } from '../../domain/models/compra.model';
+import { Pagination } from '../../domain/models/pagination.model';
 
-@Injectable({
-  providedIn: 'root'
-})
+export interface CompraPayload {
+  proveedor: number;
+  usuario: number;
+  numero_factura: string;
+  fecha: string;
+}
+
+@Injectable({ providedIn: 'root' })
 export class ComprasService {
+  private readonly http = inject(HttpClient);
+  private readonly api = 'http://127.0.0.1:8000/api/compras/';
 
-  private http = inject(HttpClient);
-
-  private api = "http://127.0.0.1:8000/api/compras/";
-
-  getCompras(params?: any){
-
-    return this.http.get<Pagination<Compra>>(this.api,{
-      params
-    });
-
+  getCompras(params?: Record<string, string | number>): Observable<Pagination<Compra>> {
+    return this.http.get<Pagination<Compra>>(this.api, { params });
   }
 
-  getCompra(id:number){
-
+  getCompra(id: number): Observable<Compra> {
     return this.http.get<Compra>(`${this.api}${id}/`);
-
   }
 
-  createCompra(data:any){
-
-    return this.http.post<Compra>(this.api,data);
-
+  createCompra(data: CompraPayload): Observable<Compra> {
+    return this.http.post<Compra>(this.api, data);
   }
 
-  updateCompra(id:number,data:any){
-
-    return this.http.put(`${this.api}${id}/`,data);
-
+  updateCompra(id: number, data: CompraPayload): Observable<Compra> {
+    return this.http.put<Compra>(`${this.api}${id}/`, data);
   }
 
-  deleteCompra(id:number){
-
-    return this.http.delete(`${this.api}${id}/`);
-
+  deleteCompra(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.api}${id}/`);
   }
-
 }

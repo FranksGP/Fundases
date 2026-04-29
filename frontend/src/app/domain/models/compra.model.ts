@@ -5,5 +5,6 @@ export interface Compra {
   id: number;
   proveedor: Proveedor;
   usuario: Usuario;
+  numero_factura: string;
   fecha: string;
 }

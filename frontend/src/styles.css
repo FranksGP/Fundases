@@ -1,1 +1,24 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+  --bg: #f3f5f9;
+  --panel: #ffffff;
+  --primary: #1f6feb;
+  --text: #1f2937;
+  --muted: #6b7280;
+  --danger: #d93025;
+}
+
+* { box-sizing: border-box; font-family: Inter, system-ui, sans-serif; }
+body { margin: 0; background: var(--bg); color: var(--text); }
+
+.panel { background: var(--panel); border-radius: 12px; padding: 1rem; box-shadow: 0 8px 24px rgba(0,0,0,.06); }
+.panel__header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: 1rem; }
+.btn { border: 0; padding: .6rem .9rem; border-radius: 8px; cursor: pointer; text-decoration: none; display: inline-block; }
+.btn--primary { background: var(--primary); color: #fff; }
+.error { color: var(--danger); }
+.table { width: 100%; border-collapse: collapse; background: #fff; }
+.table th, .table td { text-align: left; padding: .65rem; border-bottom: 1px solid #e5e7eb; }
+
+.form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: .9rem; }
+.field { display: flex; flex-direction: column; gap: .3rem; }
+.field input, .field select { padding: .6rem; border: 1px solid #d1d5db; border-radius: 8px; }
+@media (max-width: 760px) { .table { font-size: .85rem; } }
